@@ -6,7 +6,7 @@
 /*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:58:53 by tfregni           #+#    #+#             */
-/*   Updated: 2023/12/01 16:59:18 by tfregni          ###   ########.fr       */
+/*   Updated: 2023/12/02 10:36:56 by tfregni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <vector>
 
 int main(void) {
-    std::ifstream file("00_input.txt");
+    std::ifstream file("input.txt");
     std::string line;
     std::vector<int> digits;
     int total = 0;
