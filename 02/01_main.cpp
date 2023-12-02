@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   01_main.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/02 10:43:39 by tfregni           #+#    #+#             */
+/*   Updated: 2023/12/02 10:43:40 by tfregni          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <sstream>
-#include <vector>
 
 enum e_color {
     RED,
