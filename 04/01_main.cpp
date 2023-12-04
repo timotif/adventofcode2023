@@ -6,7 +6,7 @@
 /*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:38:15 by tfregni           #+#    #+#             */
-/*   Updated: 2023/12/04 13:38:17 by tfregni          ###   ########.fr       */
+/*   Updated: 2023/12/04 16:57:03 by tfregni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,25 @@ int main(void) {
         nums.line = line.substr(line.find('|') + 2);
         lineToVec(&winners);
         lineToVec(&nums);
-        for (int i = 0; i < multipliers[lineIdx]; i++) {
-            std::vector<int>::iterator itWin = winners.nums.begin();
-            int matches = 0;
-            while (itWin != winners.nums.end()) {
-                std::vector<int>::iterator itNum = nums.nums.begin();
-                while (itNum != nums.nums.end()) {
-                    if (*itWin == *itNum) {
-                        matches++;
-                    }
-                    itNum++;
+        std::vector<int>::iterator itWin = winners.nums.begin();
+        int matches = 0;
+        while (itWin != winners.nums.end()) {
+            std::vector<int>::iterator itNum = nums.nums.begin();
+            while (itNum != nums.nums.end()) {
+                if (*itWin == *itNum) {
+                    matches++;
                 }
-                itWin++;
+                itNum++;
             }
+            itWin++;
+        }
+        for (int i = 0; i < multipliers[lineIdx]; i++) {
             addMultiplier(multipliers, lineIdx, matches);
             total += matches;
         }
         lineIdx++;
     }
     file.close();
-    std::cout << "Total: " << total + lineIdx << std::endl;
+    total += lineIdx;
+    std::cout << "Total: " << total << std::endl;
 }
