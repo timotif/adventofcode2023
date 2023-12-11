@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   00_main.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/11 19:17:57 by tfregni           #+#    #+#             */
+/*   Updated: 2023/12/11 19:17:58 by tfregni          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -62,21 +74,13 @@ int main(void) {
             empty_row.push_back(row);
         row++;
     }
-    // printMap(map);
-    // std::cout << "Empty rows: ";
-    // printVecInt(empty_row);
-    // std::cout << "Empty cols: ";
-    // printVecInt(empty_col);
     file.close();
     // Expanding universe
     for (size_t i = 0; i < empty_row.size(); i++)
-        map.insert(map.begin() + empty_row[i] + i, std::vector<char>(map[0].size(), '.')); // insert empty rows
+        map.insert(map.begin() + empty_row[i] + i, std::vector<char>(map[0].size(), '.'));
     for (size_t i = 0; i < empty_col.size(); i++)
         for (size_t j = 0; j < map.size(); j++)
-            map[j].insert(map[j].begin() + empty_col[i] + i, '.'); // insert empty cols
-    // printMap(map);
-    // std::cout << "Galaxies: " << std::endl;
-    // printGalaxies(galaxies);
+            map[j].insert(map[j].begin() + empty_col[i] + i, '.');
     galaxies.clear();
     for (size_t i = 0; i < map.size(); i++) {
         for (size_t j = 0; j < map[0].size(); j++) {
@@ -84,18 +88,13 @@ int main(void) {
                 galaxies.push_back(std::make_pair(j, i));
         }
     }
-    // printGalaxies(galaxies);
 
     int total = 0;
-    // int pairs = 0;
     for (size_t i = 0; i < galaxies.size() - 1; i++) {
         for (size_t j = i + 1; j < galaxies.size(); j++) {
-            // pairs++;
             int distance = findDistance(galaxies[i], galaxies[j]);
-            // std::cout << "Distance between " << i + 1 << " and " << j + 1 << " is " << distance << std::endl;
             total += distance;
         }
-    } 
-    // std::cout << "Total pairs: " << pairs << std::endl;
+    }
     std::cout << "Total distance: " << total << std::endl;
 }
