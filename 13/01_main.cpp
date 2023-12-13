@@ -21,30 +21,74 @@ std::ostream &operator<<(std::ostream &os, const std::vector<std::string> &grid)
     return (os);
 }
 
-int findMirror(std::vector<std::string> const &grid) {
+int diffStr(std::string const &a, std::string const &b) {
     int ret = 0;
+    for (size_t i = 0; i < a.size(); i++) {
+        if (a[i] != b[i])
+            ret++;
+    }
+    return (ret);
+}
+
+ssize_t findDiff(std::string const &a, std::string const &b) {
+    for (size_t i = 0; i < a.size(); i++) {
+        if (a[i] != b[i])
+            return (i);
+    }
+    return (-1);
+}
+
+bool replaceCell(std::vector<std::string> &grid, size_t i, size_t j) {
+    if (i < 0 || j < 0) {
+        return (false);
+    }
+    if (grid[i][j] == '.')
+        grid[i][j] = '#';
+    else
+        grid[i][j] = '.';
+    return (true);
+}
+
+int findMirror(std::vector<std::string> &grid) {
+    bool changed = false;
     for (size_t i = 0; i < grid.size() - 1; i++) {
-        // std::cout << "Checking " << i << std::endl;
-        if (grid[i] == grid[i + 1]) { // Found candidate
-            // std::cout << "Found candidate" << std::endl;
+        int diff = diffStr(grid[i], grid[i + 1]);
+        if (diff <= 1) { // Found candidate
             bool valid = true;
             size_t curUp = i;
             size_t curDown = i + 1;
+            std::vector<std::string> tmp = grid;
             while (1) {
-                if (grid[curUp] != grid[curDown])
+                diff = diffStr(grid[curUp], grid[curDown]);
+                size_t pos = findDiff(grid[curUp], grid[curDown]);
+                if (diff == 1 && pos >= 0 && !changed) {
+                    if (replaceCell(grid, curUp, pos)) {
+                        changed = true;
+                    }
+                    continue ;
+                }
+                if (diff > 1) {
                     valid = false;
+                    break ;
+                }
                 if (curUp <= 0 || curDown >= grid.size() - 1)
                     break ;
                 curUp--;
                 curDown++;
             }
-            ret += valid * (i + 1);
+            if (valid && changed)
+                return (i + 1);
+            else { // If after changing no valid match was found then revert
+                grid = tmp;
+                changed = false;
+            }
+
         }
     }
-    return (ret);
+    return (0);
 }
 
-int processGrid(std::vector<std::string> const &grid) {
+int processGrid(std::vector<std::string> &grid) {
     std::vector<std::string> rGrid = rotateGrid(grid);
     return (findMirror(grid) * 100 + findMirror(rGrid));
 }
@@ -68,5 +112,7 @@ int main(void) {
         }
     }
     file.close();
-    std::cout << "Total: " << total + processGrid(grid) << std::endl;
+    if (grid.size() > 0)
+        total += processGrid(grid);
+    std::cout << "Total: " << total << std::endl;
 }
