@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   00_main.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/13 17:07:11 by tfregni           #+#    #+#             */
+/*   Updated: 2023/12/13 17:07:54 by tfregni          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -24,9 +36,7 @@ std::ostream &operator<<(std::ostream &os, const std::vector<std::string> &grid)
 int findMirror(std::vector<std::string> const &grid) {
     int ret = 0;
     for (size_t i = 0; i < grid.size() - 1; i++) {
-        // std::cout << "Checking " << i << std::endl;
         if (grid[i] == grid[i + 1]) { // Found candidate
-            // std::cout << "Found candidate" << std::endl;
             bool valid = true;
             size_t curUp = i;
             size_t curDown = i + 1;
@@ -68,5 +78,7 @@ int main(void) {
         }
     }
     file.close();
-    std::cout << "Total: " << total + processGrid(grid) << std::endl;
+    if (!grid.empty())
+        total += processGrid(grid);
+    std::cout << "Total: " << total << std::endl;
 }
