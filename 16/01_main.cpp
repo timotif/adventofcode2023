@@ -6,7 +6,7 @@
 /*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:49:57 by tfregni           #+#    #+#             */
-/*   Updated: 2023/12/18 22:49:58 by tfregni          ###   ########.fr       */
+/*   Updated: 2023/12/19 20:30:15 by tfregni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <set>
 #include <tuple>
 #include <deque>
+#include <vector>
 
 enum e_value {
     ROW,
