@@ -6,7 +6,7 @@
 /*   By: tfregni <tfregni@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 22:40:24 by tfregni           #+#    #+#             */
-/*   Updated: 2023/12/19 22:40:25 by tfregni          ###   ########.fr       */
+/*   Updated: 2023/12/19 22:45:25 by tfregni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int main(void) {
         cur = pq.top();
         pq.pop();
         // End game
-        if ((size_t)std::get<ROW>(cur) == grid.size() - 1 && (size_t)std::get<COL>(cur) == grid[0].size() - 1) {
+        if ((size_t)std::get<ROW>(cur) == grid.size() - 1 && (size_t)std::get<COL>(cur) == grid[0].size() - 1 && std::get<STEPS>(cur) >= 4) {
             std::cout << "Heat loss: " << -std::get<HEAT>(cur) << std::endl;
             break ;
         }
